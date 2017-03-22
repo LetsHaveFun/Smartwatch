@@ -16,6 +16,7 @@ public class Smartwatch {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        // Maksim here
     }
     
 }
