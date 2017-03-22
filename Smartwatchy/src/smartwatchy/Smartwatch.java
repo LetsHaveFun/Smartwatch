@@ -9,7 +9,7 @@ package smartwatchy;
  *
  * @author Maksim
  */
-public class Smartwatchy {
+public class Smartwatch {
 
     /**
      * @param args the command line arguments
