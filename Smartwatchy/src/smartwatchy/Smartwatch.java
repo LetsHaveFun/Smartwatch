@@ -7,7 +7,7 @@ package smartwatchy;
 
 /**
  *
- * @author Maksim
+ * @author Not mAks but alex
  */
 public class Smartwatch {
 
