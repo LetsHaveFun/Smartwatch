@@ -1,7 +1,20 @@
 package controllers;
 
-public class TimeController implements MainController{
+import java.util.Timer;
+import java.util.TimerTask;
 
+public class TimeController implements MainController{
+	
+	private Timer updateTimeTimer;
+
+	public TimeController ()
+	{
+		updateTimeTimer.schedule(updateTime(), 12000);
+	}
+	private TimerTask updateTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
 	public void buttonPressedA() {
 		// TODO Auto-generated method stub
