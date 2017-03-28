@@ -4,11 +4,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class TimeController implements MainController{
-	
+	private Time time;
 	private Timer updateTimeTimer;
 
 	public TimeController ()
 	{
+		time = new Time();
 		updateTimeTimer.schedule(updateTime(), 12000);
 	}
 	private TimerTask updateTime() {
