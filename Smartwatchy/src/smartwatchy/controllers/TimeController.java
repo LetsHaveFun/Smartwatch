@@ -3,6 +3,8 @@ package controllers;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import model.Time;
+
 public class TimeController implements MainController{
 	private Time time;
 	private Timer updateTimeTimer;
