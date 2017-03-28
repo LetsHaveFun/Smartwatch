@@ -36,7 +36,7 @@ public class WeatherController implements MainController{
 
         try {
 
-            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=Emmen&appid=997fd862e4b65ba284fb387cd98b35c7");
+            URL url = new URL("http://api.openweathermap.org/data/2.5/daily?q=Emmen&type=accurate&mode=xml&units=metric&appid=997fd862e4b65ba284fb387cd98b35c7");
             br = new BufferedReader(new InputStreamReader(url.openStream()));
 
             String line;
