@@ -9,7 +9,7 @@ public class NotificationController implements MainController{
 	
 	public NotificationController()
 	{
-		updateNotificationsTimer.schedule(updateNotifications(), 12000);
+		updateNotificationsTimer.schedule(updateNotifications(), 2000);
 	}
 	private TimerTask updateNotifications() {
 		// TODO Auto-generated method stub

@@ -12,12 +12,14 @@ public class TimeController implements MainController{
 	public TimeController ()
 	{
 		time = new Time();
-		updateTimeTimer.schedule(updateTime(), 12000);
+		updateTimeTimer.schedule(TimeTick(), 1000);
 	}
-	private TimerTask updateTime() {
+	
+	private TimerTask TimeTick() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	@Override
 	public void buttonPressedA() {
 		// TODO Auto-generated method stub

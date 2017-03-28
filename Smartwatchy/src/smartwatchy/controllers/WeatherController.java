@@ -7,7 +7,7 @@ public class WeatherController implements MainController{
 	
 	public WeatherController()
 	{
-		updateWeatherTimer.schedule(updateWeather(), 12000);
+		updateWeatherTimer.schedule(updateWeather(), 5000);
 	}
 	private TimerTask updateWeather() {
 		//calling the weather function to run
