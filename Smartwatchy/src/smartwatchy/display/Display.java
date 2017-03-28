@@ -1,4 +1,4 @@
-package smartwatchy.display;
+package display;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

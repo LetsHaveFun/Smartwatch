@@ -1,4 +1,4 @@
-package smartwatchy.display;
+package display;
 
 /**
  * @author Maksim
