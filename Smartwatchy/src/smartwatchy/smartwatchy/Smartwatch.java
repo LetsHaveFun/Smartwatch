@@ -5,6 +5,10 @@
  */
 package smartwatchy;
 
+import java.io.IOException;
+
+import controllers.WeatherController;
+
 /**
  *
  * @author Not mAks but alex
@@ -17,6 +21,13 @@ public class Smartwatch {
     public static void main(String[] args) {
         // TODO code application logic here
         // Maksim here
+    	WeatherController test = new WeatherController();
+    	try {
+			System.out.println(test.GetWeatherJSON().toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
 }
