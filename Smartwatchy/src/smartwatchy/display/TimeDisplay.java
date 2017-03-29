@@ -13,5 +13,6 @@ public class TimeDisplay extends Display{
 		textArea.setRows(2);
 		textArea.setText("This is the time");
 		add(textArea);
+		timeController = new TimeController();
     }
 }

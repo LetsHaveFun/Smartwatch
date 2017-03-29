@@ -16,7 +16,7 @@ public class TimeController implements Controller{
 	public TimeController ()
 	{
 		time = new Time();
-		updateTimeTimer.schedule(TimeTick(), 1000);
+		//updateTimeTimer.schedule(TimeTick(), 1000);
 	}
 	
 	private TimerTask TimeTick() {
