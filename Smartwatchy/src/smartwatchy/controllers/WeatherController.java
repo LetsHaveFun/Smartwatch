@@ -52,23 +52,35 @@ public class WeatherController implements Controller{
 		
 	}
 	
-//	public String workWithWeather(StringBuilder test)
-//	{
-//		StringBuilder xmlStringBuilder = new StringBuilder();
-//		xmlStringBuilder.append("<?xml version="1.0"?> <class> </class>");
-//		ByteArrayInputStream input =  new ByteArrayInputStream(
-//		   xmlStringBuilder.toString().getBytes("UTF-8"));
-//		Document doc = builder.parse(input)
-//		
-//	}
+	public Weather GetCurrentWeather()
+	{
+		try {
+			JSONObject obj = new JSONObject(GetWeatherJSON());
+			int tmptemp = obj.getInt("temp"); 
+			
+			int tmpcod = obj.getInt("cod");
+			
+			Weather newCurrentWeather = new Weather(tmptemp, tmpcod);
+			return newCurrentWeather;
+		} catch (JSONException e) {			
+			e.printStackTrace();
+			return null;
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
-	public StringBuilder GetWeatherJSON() throws MalformedURLException, IOException
+	private String GetWeatherJSON() throws MalformedURLException, IOException
 	{
 		BufferedReader br = null;
 
         try {
 
-            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=Emmen&type=accurate&mode=xml&units=metric&appid=997fd862e4b65ba284fb387cd98b35c7");
+            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=Emmen&type=accurate&mode=json&units=metric&appid=997fd862e4b65ba284fb387cd98b35c7");
             br = new BufferedReader(new InputStreamReader(url.openStream()));
 
             String line;
@@ -81,7 +93,7 @@ public class WeatherController implements Controller{
                 sb.append(System.lineSeparator());
             }
 
-            return sb;
+            return sb.toString();
         } finally {
 
             if (br != null) {
