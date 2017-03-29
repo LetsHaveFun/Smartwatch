@@ -71,7 +71,7 @@ public class MainDisplay implements ActionListener{
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource()==button1)
 		{
-			curDisplay.Controller.ButtonPressedA();
+			//curDisplay.Controller.ButtonPressedA();
 			
 		}
 	}
