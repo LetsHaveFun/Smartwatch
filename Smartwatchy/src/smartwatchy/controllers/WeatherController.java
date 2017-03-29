@@ -35,7 +35,7 @@ public class WeatherController implements MainController{
 		// TODO Auto-generated method stub
 		
 	}
-	public String workWithWeather(StringBuilder test)
+	/*public String workWithWeather(StringBuilder test)
 	{
 		StringBuilder xmlStringBuilder = new StringBuilder();
 		xmlStringBuilder.append("<?xml version="1.0"?> <class> </class>");
@@ -43,7 +43,7 @@ public class WeatherController implements MainController{
 		   xmlStringBuilder.toString().getBytes("UTF-8"));
 		Document doc = builder.parse(input)
 		
-	}
+	}*/
 	
 	public StringBuilder GetWeatherJSON() throws MalformedURLException, IOException
 	{

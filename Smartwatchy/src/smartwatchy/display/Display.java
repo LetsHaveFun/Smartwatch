@@ -5,6 +5,8 @@ import javax.swing.*;
 /**
  * @author Maksim
  */
-public abstract class Display {
+public abstract class Display extends JPanel{
     
+	
+	
 }
