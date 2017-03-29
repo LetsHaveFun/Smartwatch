@@ -1,6 +1,6 @@
 package controllers;
 
-public interface MainController {
+public interface Controller {
 	public void buttonPressedA();
 	public void buttonPressedB();
 }

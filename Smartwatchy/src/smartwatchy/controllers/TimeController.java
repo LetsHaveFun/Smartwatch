@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 import model.Time;
 
-public class TimeController implements MainController{
+public class TimeController implements Controller{
 	private Time time;
 	private Timer updateTimeTimer;
 	
