@@ -17,5 +17,13 @@ public class Notification {
 	{
 		return this;
 	}
+	public String GetNotificationString()
+	{
+		return notification;
+	}
+	public Timestamp GetNotificationTimestamp()
+	{
+		return timestamp;
+	}
 
 }
