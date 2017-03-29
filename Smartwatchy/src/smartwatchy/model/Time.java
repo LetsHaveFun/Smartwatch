@@ -22,4 +22,19 @@ public class Time {
 			}
 		}
 	}
+	
+	public void IncrementSeconds()
+	{
+		seconds.Increment();
+	}
+	
+	public void IncrementMinutes()
+	{
+		minutes.Increment();
+	}
+	
+	public void IncrementHours()
+	{
+		hours.Increment();
+	}
 }

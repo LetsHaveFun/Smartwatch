@@ -1,4 +1,6 @@
 package controllers;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -8,21 +10,35 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.w3c.dom.*;
+
+import model.Weather;
+
 import javax.xml.parsers.*;
 import java.io.*;
 
-public class WeatherController implements MainController{
+public class WeatherController implements Controller{
 	private Timer updateWeatherTimer;
+	private List<WeatherListener> listeners = new ArrayList<WeatherListener>();
 	
-	public WeatherController() throws ParserConfigurationException
+	public WeatherController()
 	{
 		//updateWeatherTimer.schedule(updateWeather(), 5000);
-		DocumentBuilderFactory factory =
-		DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
 	}
+	
+	public void addListener(WeatherListener toAdd) {
+        listeners.add(toAdd);
+    }
+
+    public void PushWarning() {
+
+        // Notify everybody that may be interested.
+        for (WeatherListener wl : listeners)
+            wl.WeatherWarning();
+    }
+	
 	private TimerTask updateWeather() {
 		//calling the weather function to run
+		// overwrite currentWeather
 		return null;
 	}
 	@Override
@@ -35,15 +51,16 @@ public class WeatherController implements MainController{
 		// TODO Auto-generated method stub
 		
 	}
-	/*public String workWithWeather(StringBuilder test)
-	{
-		StringBuilder xmlStringBuilder = new StringBuilder();
-		xmlStringBuilder.append("<?xml version="1.0"?> <class> </class>");
-		ByteArrayInputStream input =  new ByteArrayInputStream(
-		   xmlStringBuilder.toString().getBytes("UTF-8"));
-		Document doc = builder.parse(input)
-		
-	}*/
+	
+//	public String workWithWeather(StringBuilder test)
+//	{
+//		StringBuilder xmlStringBuilder = new StringBuilder();
+//		xmlStringBuilder.append("<?xml version="1.0"?> <class> </class>");
+//		ByteArrayInputStream input =  new ByteArrayInputStream(
+//		   xmlStringBuilder.toString().getBytes("UTF-8"));
+//		Document doc = builder.parse(input)
+//		
+//	}
 	
 	public StringBuilder GetWeatherJSON() throws MalformedURLException, IOException
 	{

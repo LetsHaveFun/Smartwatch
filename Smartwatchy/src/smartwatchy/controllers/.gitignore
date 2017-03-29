@@ -5,3 +5,7 @@
 /TimeController.class
 /Time.class
 /TimeUnit.class
+/SetTimeController.class
+/NotificationListener.class
+/Controller.class
+/WeatherListener.class
