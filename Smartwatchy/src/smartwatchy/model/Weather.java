@@ -2,12 +2,12 @@ package model;
 
 public class Weather {
 	
-	public String weather;
+	public String description;
 	public int temperature;
 	
 	public Weather(String weathertmp, int temperaturetmp)
 	{
-		weather = weathertmp;
+		description = weathertmp;
 		temperature = temperaturetmp;
 	}
 	

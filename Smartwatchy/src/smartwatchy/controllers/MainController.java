@@ -1,4 +1,4 @@
-package smartwatchy.controllers;
+package controllers;
 
 public interface MainController {
 	public void buttonPressedA();
