@@ -11,6 +11,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import org.w3c.dom.*;
 
+import json.JSONException;
+import json.JSONObject;
 import model.Weather;
 
 import javax.xml.parsers.*;
@@ -56,7 +58,7 @@ public class WeatherController implements Controller{
 	{
 		try {
 			JSONObject obj = new JSONObject(GetWeatherJSON());
-			int tmptemp = obj.getInt("temp"); 
+			int tmptemp =  0; //obj.getInt("temp"); 
 			
 			int tmpcod = obj.getInt("cod");
 			
