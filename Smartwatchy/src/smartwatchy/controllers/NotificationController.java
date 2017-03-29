@@ -20,9 +20,9 @@ public class NotificationController implements MainController{
 		return null;
 	}
 	
-	public Notification GetFirstInQueue()
+	public Queue<Notification> GetNotificationQueue()
 	{
-		return notificationQueue.peek();
+		return notificationQueue;
 	}
 	
 	@Override
