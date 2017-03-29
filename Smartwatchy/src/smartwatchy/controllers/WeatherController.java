@@ -14,12 +14,9 @@ import java.io.*;
 public class WeatherController implements MainController{
 	private Timer updateWeatherTimer;
 	
-	public WeatherController() throws ParserConfigurationException
+	public WeatherController()
 	{
 		//updateWeatherTimer.schedule(updateWeather(), 5000);
-		DocumentBuilderFactory factory =
-		DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
 	}
 	private TimerTask updateWeather() {
 		//calling the weather function to run
@@ -35,15 +32,16 @@ public class WeatherController implements MainController{
 		// TODO Auto-generated method stub
 		
 	}
-	public String workWithWeather(StringBuilder test)
-	{
-		StringBuilder xmlStringBuilder = new StringBuilder();
-		xmlStringBuilder.append("<?xml version="1.0"?> <class> </class>");
-		ByteArrayInputStream input =  new ByteArrayInputStream(
-		   xmlStringBuilder.toString().getBytes("UTF-8"));
-		Document doc = builder.parse(input)
-		
-	}
+	
+//	public String workWithWeather(StringBuilder test)
+//	{
+//		StringBuilder xmlStringBuilder = new StringBuilder();
+//		xmlStringBuilder.append("<?xml version="1.0"?> <class> </class>");
+//		ByteArrayInputStream input =  new ByteArrayInputStream(
+//		   xmlStringBuilder.toString().getBytes("UTF-8"));
+//		Document doc = builder.parse(input)
+//		
+//	}
 	
 	public StringBuilder GetWeatherJSON() throws MalformedURLException, IOException
 	{
