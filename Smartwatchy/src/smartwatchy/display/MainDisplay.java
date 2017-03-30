@@ -111,7 +111,8 @@ public class MainDisplay implements NotificationListener{
 	private void switchMode(String nextDisplay)
 	{
 		removeCurPanel();
-		addNewDisplay(nextDisplay);		
+		addNewDisplay(nextDisplay);
+		frame.revalidate();		
 	}	
 
 	private void removeCurPanel(){
@@ -127,7 +128,6 @@ public class MainDisplay implements NotificationListener{
 				frame.add(curDisplay, BorderLayout.EAST);
 				break;
 			case "WeatherDisplay":
-				System.out.println("test");
 				curDisplay = weatherDisplay;
 				curDisplayString = "weatherDisplay";
 				frame.add(curDisplay, BorderLayout.EAST);
@@ -143,5 +143,4 @@ public class MainDisplay implements NotificationListener{
 				frame.add(curDisplay, BorderLayout.EAST);
 		}		
 	}
-
 }
