@@ -91,40 +91,40 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 	
 	private void buttonOneAction()
 	{
-		if(curDisplayString.equals("timeDisplay"))
+		switch (curDisplayString)
 		{
-			timeDisplay.GetController().buttonPressedA();
-		}
-		else if(curDisplayString.equals("weatherDisplay"))
-		{
-			weatherDisplay.GetController().buttonPressedA();
-		}
-		else
-		{
-			notificationDisplay.notificationController.buttonPressedA();
+			case "timeDisplay":
+				timeDisplay.GetController().buttonPressedA();
+				break;
+			case "weatherDisplay":
+				weatherDisplay.GetController().buttonPressedA();
+				break;
+			case "NotificationDisplay":
+				notificationDisplay.notificationController.buttonPressedA();
+				break;		
 		}
 	}
 	
 	private void buttonTwoAction()
 	{
-		if(curDisplayString.equals("timeDisplay"))
+		switch (curDisplayString)
 		{
-			if (timeDisplay.GetController().GetMode() == 0)
-			{
-				switchMode("WeatherDisplay");
-			}
-			else
-			{
-				timeDisplay.GetController().buttonPressedB();
-			}
-		}
-		else if(curDisplayString.equals("weatherDisplay"))
-		{
-			weatherDisplay.GetController().buttonPressedB();
-		}
-		else
-		{
-			notificationDisplay.notificationController.buttonPressedB();
+			case "timeDisplay":
+				if (timeDisplay.GetController().GetMode() == 0)
+				{
+					switchMode("WeatherDisplay");
+				}
+				else
+				{
+					timeDisplay.GetController().buttonPressedB();
+				}
+				break;
+			case "weatherDisplay":
+				switchMode("TimeDisplay");
+				break;
+			case "NotificationDisplay":
+				notificationDisplay.notificationController.buttonPressedB();
+				break;		
 		}
 	}
 	

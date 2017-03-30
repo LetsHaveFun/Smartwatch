@@ -14,19 +14,23 @@ import org.w3c.dom.*;
 
 import json.JSONException;
 import json.JSONObject;
+import model.Time;
 import model.Weather;
 
 import javax.xml.parsers.*;
 import java.io.*;
 
 public class WeatherController implements Controller{
-	private Timer updateWeatherTimer;
+	private Timer weatherTimer;
+	private WeatherTask weatherTask;
 	private Weather currentWeather;
 	private List<WeatherListener> listeners = new ArrayList<WeatherListener>();
 	
 	public WeatherController()
 	{
-		//updateWeatherTimer.schedule(updateWeather(), 5000);
+		weatherTask = new WeatherTask(this, listeners);
+		weatherTimer = new Timer(true);
+		weatherTimer.scheduleAtFixedRate(weatherTask, 0, 15000);
 		updateCurrentWeather();
 	}
 	
@@ -45,18 +49,18 @@ public class WeatherController implements Controller{
             wl.WeatherWarning();
     }
 	
-	private void updateCurrentWeather() {
+	public void updateCurrentWeather() {
 		currentWeather = GetCurrentWeatherFromAPI();
 	}
 	
 	@Override
 	public void buttonPressedA() {
-		// TODO Auto-generated method stub		
+		updateCurrentWeather();
 	}
 	
 	@Override
 	public void buttonPressedB() {
-		// TODO Auto-generated method stub		
+			
 	}
 	
 	private Weather GetCurrentWeatherFromAPI()

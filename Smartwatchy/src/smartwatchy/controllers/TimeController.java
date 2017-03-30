@@ -3,7 +3,6 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import model.Time;
 
@@ -53,7 +52,7 @@ public class TimeController implements Controller{
 	
 	private void StartTimer()
 	{
-		timeTask = new TimeTask(time, timeListeners);
+		timeTask = new TimeTask(this, timeListeners);
 		timeTimer = new Timer(true);
 		timeTimer.scheduleAtFixedRate(timeTask, 0, 1000);
 	}

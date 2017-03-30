@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
-import model.Time;
-
 public class TimeTask extends TimerTask {
-	private Time time;
+	private TimeController timeController;
 	private List<TimeListener> listeners = new ArrayList<TimeListener>();
 	
-	public TimeTask(Time time, List<TimeListener> listeners)
+	public TimeTask(TimeController timeController, List<TimeListener> listeners)
 	{
-		this.time = time;
+		this.timeController = timeController;
 		this.listeners = listeners;
 	}
 	
@@ -25,7 +23,7 @@ public class TimeTask extends TimerTask {
 	
 	@Override
     public void run() {
-		time.Tick();
+		timeController.GetTime().Tick();
 		PushTimeTicked();
     }
 }
