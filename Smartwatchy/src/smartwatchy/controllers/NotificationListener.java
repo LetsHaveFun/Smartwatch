@@ -1,5 +1,5 @@
 package controllers;
 
 public interface NotificationListener {
-	void NewNotification();
+	public void NewNotification();
 }

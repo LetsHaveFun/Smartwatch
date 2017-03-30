@@ -8,19 +8,20 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MainDisplay{
+import controllers.NotificationListener;
+
+public class MainDisplay implements NotificationListener{
 	
 	private NotificationDisplay notificationDisplay;
 	private TimeDisplay timeDisplay;
 	private WeatherDisplay weatherDisplay;
 	private JFrame frame;
 	private JButton button1, button2;
-	private JPanel displayPanel, buttonPanel;
+	private JPanel buttonPanel;
 	private Display curDisplay;
 	private String curDisplayString;
 	
-	public MainDisplay(){
-		
+	public MainDisplay(){		
 		notificationDisplay = new NotificationDisplay();
 		timeDisplay = new TimeDisplay();
 		weatherDisplay = new WeatherDisplay();
@@ -62,20 +63,21 @@ public class MainDisplay{
 		frame.pack();
 		
 	}
-	public void removeCurPanel(){
-		frame.remove(curDisplay);
-		
+
+	@Override
+	public void NewNotification() {
+		switchMode("NotificationDisplay");		
 	}
 	
 	private void buttonOneAction()
 	{
 		if(curDisplayString.equals("timeDisplay"))
 		{
-			timeDisplay.timeController.buttonPressedA();
+			timeDisplay.GetController().buttonPressedA();
 		}
 		else if(curDisplayString.equals("weatherDisplay"))
 		{
-			weatherDisplay.weatherController.buttonPressedA();
+			weatherDisplay.GetController().buttonPressedA();
 		}
 		else
 		{
@@ -87,11 +89,18 @@ public class MainDisplay{
 	{
 		if(curDisplayString.equals("timeDisplay"))
 		{
-			timeDisplay.timeController.buttonPressedB();
+			if (timeDisplay.GetController().GetMode() == 0)
+			{
+				switchMode("WeatherDisplay");
+			}
+			else
+			{
+				timeDisplay.GetController().buttonPressedB();
+			}
 		}
 		else if(curDisplayString.equals("weatherDisplay"))
 		{
-			weatherDisplay.weatherController.buttonPressedB();
+			weatherDisplay.GetController().buttonPressedB();
 		}
 		else
 		{
@@ -99,23 +108,40 @@ public class MainDisplay{
 		}
 	}
 	
-	public void addNewDisplay(String nextDisplay){
-		if(nextDisplay=="TimeDisplay"){
-			curDisplay = timeDisplay;
-			curDisplayString = "timeDisplay";
-			frame.add(curDisplay, BorderLayout.EAST);
-		}
-		else if(nextDisplay=="WeatherDisplay"){
-			curDisplay = weatherDisplay;
-			curDisplayString = "weatherDisplay";
-			frame.add(curDisplay, BorderLayout.EAST);
-		}
-		else{
-			curDisplay = notificationDisplay;
-			curDisplayString = "notificationDisplay";
-			frame.add(curDisplay, BorderLayout.EAST);
-		}
-		
+	private void switchMode(String nextDisplay)
+	{
+		removeCurPanel();
+		addNewDisplay(nextDisplay);		
+	}	
+
+	private void removeCurPanel(){
+		frame.remove(curDisplay);
+	}	
+	
+	private void addNewDisplay(String nextDisplay){
+		switch (nextDisplay)
+		{
+			case "TimeDisplay":
+				curDisplay = timeDisplay;
+				curDisplayString = "timeDisplay";
+				frame.add(curDisplay, BorderLayout.EAST);
+				break;
+			case "WeatherDisplay":
+				System.out.println("test");
+				curDisplay = weatherDisplay;
+				curDisplayString = "weatherDisplay";
+				frame.add(curDisplay, BorderLayout.EAST);
+				break;
+			case "NotificationDisplay":
+				curDisplay = notificationDisplay;
+				curDisplayString = "notificationDisplay";
+				frame.add(curDisplay, BorderLayout.EAST);
+				break;
+			default:
+				curDisplay = timeDisplay;
+				curDisplayString = "timeDisplay";
+				frame.add(curDisplay, BorderLayout.EAST);
+		}		
 	}
 
 }

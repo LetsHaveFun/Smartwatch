@@ -23,7 +23,7 @@ public class NotificationController implements Controller{
         listeners.add(toAdd);
     }
 
-    public void PushNotification() {
+    private void PushNotification() {
 
         // Notify everybody that may be interested.
         for (NotificationListener nl : listeners)

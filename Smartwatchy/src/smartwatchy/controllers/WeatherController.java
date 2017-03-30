@@ -31,7 +31,7 @@ public class WeatherController implements Controller{
         listeners.add(toAdd);
     }
 
-    public void PushWarning() {
+    private void PushWarning() {
 
         // Notify everybody that may be interested.
         for (WeatherListener wl : listeners)

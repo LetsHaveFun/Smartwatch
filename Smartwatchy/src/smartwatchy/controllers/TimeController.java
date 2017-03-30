@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -7,7 +9,9 @@ import model.Time;
 
 public class TimeController implements Controller{
 	private Time time;
-	private Timer updateTimeTimer;
+	private Timer timeTimer;
+	private TimeTask timeTask;
+	private List<TimeListener> listeners = new ArrayList<TimeListener>();
 	
 	// 0 = show time, 
 	// 1 = increment seconds, 2 = minutes, 3 = hours
@@ -16,19 +20,49 @@ public class TimeController implements Controller{
 	public TimeController ()
 	{
 		time = new Time();
-		//updateTimeTimer.schedule(TimeTick(), 1000);
+		timeMode = 0;
+		StartTimer();
 	}
 	
-	private TimerTask TimeTick() {
-		if (timeMode == 0)
+	public Time GetTime()
+	{
+		return time;
+	}
+	
+	public int GetMode()
+	{
+		return timeMode;
+	}
+	
+	public void addListener(TimeListener toAdd) {
+        listeners.add(toAdd);
+    }
+	
+	private void PauseTimer()
+	{
+		if (timeTimer != null)
 		{
-			time.Tick();
+			timeTimer.cancel();
 		}
-		return null;
+	}
+	
+	private void StartTimer()
+	{
+		timeTask = new TimeTask(time, listeners);
+		timeTimer = new Timer(true);
+		timeTimer.scheduleAtFixedRate(timeTask, 0, 1000);
+	}
+	
+	private void NotifyTimeChanged()
+	{
+		// Notify everybody that may be interested.
+        for (TimeListener tl : listeners)
+            tl.TimeChanged();
 	}
 	
 	@Override
 	public void buttonPressedA() {
+		PauseTimer();
 		switch (timeMode)
 		{
 			case 0:
@@ -36,12 +70,15 @@ public class TimeController implements Controller{
 				break;
 			case 1:
 				time.IncrementSeconds();
+				NotifyTimeChanged();
 				break;
 			case 2:
 				time.IncrementMinutes();
+				NotifyTimeChanged();
 				break;
 			case 3:
 				time.IncrementHours();
+				NotifyTimeChanged();
 				break;
 		}		
 	}
@@ -50,18 +87,16 @@ public class TimeController implements Controller{
 	public void buttonPressedB() {
 		switch (timeMode)
 		{
-			case 0:
-				break;
 			case 1:
 				timeMode = 2;
+				break;
 			case 2:
 				timeMode = 3;
 				break;
 			case 3:
 				timeMode = 0;
+				StartTimer();
 				break;
-		}
-		
+		}		
 	}
-
 }

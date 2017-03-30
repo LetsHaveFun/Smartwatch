@@ -1,5 +1,5 @@
 package controllers;
 
 public interface WeatherListener {
-	void WeatherWarning();
+	public void WeatherWarning();
 }

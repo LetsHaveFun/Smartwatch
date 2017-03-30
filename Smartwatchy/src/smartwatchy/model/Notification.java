@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 
 public class Notification {
 	
-	public String notification;
-	public Timestamp timestamp;
+	private String notification;
+	private Timestamp timestamp;
 	
 	public Notification(String notificationtmp, Timestamp timestamptmp)
 	{

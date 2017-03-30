@@ -18,17 +18,7 @@ public class Smartwatch
 	
     public static void main(String[] args) 
     {
-    	mainDisplay = new MainDisplay();
-    	
-	}
-
-
-	
-	public void switchMode(String nextDisplay)
-	{
-		mainDisplay.removeCurPanel();
-		mainDisplay.addNewDisplay(nextDisplay);
-		
+    	mainDisplay = new MainDisplay();	
 	}
 }
     

@@ -6,7 +6,7 @@ import javax.swing.JTextArea;
 
 public class WeatherDisplay extends Display{
 
-	protected WeatherController weatherController;
+	private WeatherController weatherController;
 
 	public WeatherDisplay(){
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -14,5 +14,12 @@ public class WeatherDisplay extends Display{
 		textArea.setRows(2);
 		textArea.setText("This is the weather");
 		add(textArea);
+		
+		weatherController = new WeatherController();
     }
+	
+	public WeatherController GetController()
+	{
+		return weatherController;
+	}
 }

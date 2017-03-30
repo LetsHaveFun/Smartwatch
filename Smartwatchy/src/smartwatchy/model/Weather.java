@@ -1,9 +1,8 @@
 package model;
 
-public class Weather {
-	
-	public int WeatherID;
-	public int temperature;
+public class Weather {	
+	private int WeatherID;
+	private int temperature;
 	
 	public Weather(int WeatherIDTMP, int temperaturetmp)
 	{
