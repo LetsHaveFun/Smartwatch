@@ -1,29 +1,26 @@
 package model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Notification {
 	
 	private String notification;
-	private Timestamp timestamp;
+	private Date dateTime;
 	
-	public Notification(String notificationtmp, Timestamp timestamptmp)
+	public Notification(String notificationtmp)
 	{
 		notification = notificationtmp;
-		timestamp = timestamptmp;
-	}
+		dateTime = new Date();
+	} 	
 	
-	public Notification GetNotification()
-	{
-		return this;
-	}
-	public String GetNotificationString()
+	public String GetNotification()
 	{
 		return notification;
 	}
-	public Timestamp GetNotificationTimestamp()
+	
+	public Date GetNotificationDateTime()
 	{
-		return timestamp;
+		return dateTime;
 	}
 
 }
