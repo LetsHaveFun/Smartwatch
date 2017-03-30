@@ -1,11 +1,12 @@
 package display;
 
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+
+import javax.swing.border.EmptyBorder;
+import javax.swing.*;
 
 import controllers.NotificationListener;
 
@@ -16,6 +17,7 @@ public class MainDisplay implements NotificationListener{
 	private WeatherDisplay weatherDisplay;
 	private JFrame frame;
 	private JButton button1, button2;
+	private JPanel contentPane;
 	private Display curDisplay;
 	private String curDisplayString;
 	
@@ -32,8 +34,24 @@ public class MainDisplay implements NotificationListener{
 	public void makeFrame()
 	{
 		frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setBounds(100, 100, 373, 222);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		frame.setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		
 		button1 = new JButton("bt1");
+		contentPane.add(button1, BorderLayout.NORTH);
+
 		button2 = new JButton("bt2");
+		contentPane.add(button2, BorderLayout.SOUTH);
+
+		contentPane.add(curDisplay, BorderLayout.CENTER);
+
 		
 		button1.addActionListener(new ActionListener()
 		{
@@ -51,12 +69,11 @@ public class MainDisplay implements NotificationListener{
 			  }
 		});
 		
-		frame.add(curDisplay, BorderLayout.CENTER);
-		frame.add(button1, BorderLayout.NORTH);
-		frame.add(button2, BorderLayout.SOUTH);
+		
+		
+		
 		frame.setVisible(true);
 		
-		frame.pack();
 		
 	}
 
