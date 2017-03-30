@@ -60,7 +60,7 @@ public class WeatherController implements Controller{
 	
 	@Override
 	public void buttonPressedB() {
-			
+		// Currently unused	
 	}
 	
 	private Weather GetCurrentWeatherFromAPI()

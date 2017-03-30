@@ -14,7 +14,7 @@ public class WeatherTask extends TimerTask{
 		this.listeners = listeners;
 	}
 	
-	private void PushTimeTicked()
+	private void PushWeatherUpdate()
 	{
 		// Notify everybody that may be interested.
         for (WeatherListener wl : listeners)
@@ -24,6 +24,6 @@ public class WeatherTask extends TimerTask{
 	@Override
     public void run() {
 		weatherController.updateCurrentWeather();
-		PushTimeTicked();
+		PushWeatherUpdate();
     }
 }
