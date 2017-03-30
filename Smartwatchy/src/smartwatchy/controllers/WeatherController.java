@@ -59,7 +59,7 @@ public class WeatherController implements Controller{
 		// TODO Auto-generated method stub		
 	}
 	
-	public Weather GetCurrentWeatherFromAPI()
+	private Weather GetCurrentWeatherFromAPI()
 	{
 		try {
 			JSONObject forecastJSON = new JSONObject(GetWeatherForecastJSON());

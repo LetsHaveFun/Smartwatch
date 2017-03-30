@@ -36,7 +36,7 @@ public class MainDisplay implements NotificationListener{
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 373, 222);
+		frame.setBounds(100, 100, 500, 300);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

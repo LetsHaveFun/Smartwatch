@@ -21,4 +21,29 @@ public class Weather {
 		this.eveningTemp = eveningTemp;
 		dateTime = new Date(time);
 	}
+	
+	public String GetDescription()
+	{
+		return description;
+	}
+	
+	public int GetMorningTemperature()
+	{
+		return morningTemp;
+	}
+	
+	public int GetDayTemperature()
+	{
+		return dayTemp;
+	}
+	
+	public int GetNightTemperature()
+	{
+		return nightTemp;
+	}
+	
+	public int GetEveningTemperature()
+	{
+		return eveningTemp;
+	}
 }
