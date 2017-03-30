@@ -148,7 +148,8 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 	}
 	
 	private void removeCurPanel(){
-		frame.remove(curDisplay);
+		contentPane.remove(curDisplay);
+		contentPane.repaint();
 	}	
 	
 	private void addNewDisplay(String nextDisplay){
@@ -157,28 +158,28 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 			case "TimeDisplay":
 				curDisplay = timeDisplay;
 				curDisplayString = "timeDisplay";
-				frame.add(curDisplay, BorderLayout.CENTER);
+				contentPane.add(curDisplay, BorderLayout.CENTER);
 				changeButton(1, "Edit Time");
 				changeButton(2, "Show Weather");
 				break;
 			case "WeatherDisplay":
 				curDisplay = weatherDisplay;
 				curDisplayString = "weatherDisplay";
-				frame.add(curDisplay, BorderLayout.CENTER);
+				contentPane.add(curDisplay, BorderLayout.CENTER);
 				changeButton(1, "Update");
 				changeButton(2, "Show Time");
 				break;
 			case "NotificationDisplay":
 				curDisplay = notificationDisplay;
 				curDisplayString = "notificationDisplay";
-				frame.add(curDisplay, BorderLayout.CENTER);
+				contentPane.add(curDisplay, BorderLayout.CENTER);
 				changeButton(1, "Close Notification");
 				changeButton(2, "Clear Notifications");
 				break;
 			default:
 				curDisplay = timeDisplay;
 				curDisplayString = "timeDisplay";
-				frame.add(curDisplay, BorderLayout.CENTER);
+				contentPane.add(curDisplay, BorderLayout.CENTER);
 		}		
 	}
 }
