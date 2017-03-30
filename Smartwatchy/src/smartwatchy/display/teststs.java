@@ -8,6 +8,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.JTextPane;
+import javax.swing.JLabel;
 
 public class teststs extends JFrame {
 
@@ -34,7 +39,7 @@ public class teststs extends JFrame {
 	 */
 	public teststs() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 406, 235);
+		setBounds(100, 100, 373, 222);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -46,8 +51,9 @@ public class teststs extends JFrame {
 		JButton btnNewButton_1 = new JButton("New button");
 		contentPane.add(btnNewButton_1, BorderLayout.SOUTH);
 		
-		JTextArea textArea = new JTextArea();
-		contentPane.add(textArea, BorderLayout.CENTER);
+		JLabel lblNewLabel = new JLabel("<html>New label<br>\r\nsdaasdas\r\nasdada</html>");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblNewLabel, BorderLayout.CENTER);
 	}
 
 }
