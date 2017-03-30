@@ -8,9 +8,10 @@ import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
 import javax.swing.*;
 
+import controllers.ButtonListener;
 import controllers.NotificationListener;
 
-public class MainDisplay implements NotificationListener{
+public class MainDisplay implements NotificationListener, ButtonListener{
 	
 	private NotificationDisplay notificationDisplay;
 	private TimeDisplay timeDisplay;
@@ -23,7 +24,7 @@ public class MainDisplay implements NotificationListener{
 	
 	public MainDisplay(){		
 		notificationDisplay = new NotificationDisplay();
-		timeDisplay = new TimeDisplay();
+		timeDisplay = new TimeDisplay(this);
 		weatherDisplay = new WeatherDisplay();
 		curDisplay = timeDisplay;
 		curDisplayString = "timeDisplay";
@@ -44,10 +45,10 @@ public class MainDisplay implements NotificationListener{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		
-		button1 = new JButton("bt1");
+		button1 = new JButton("Edit Time");
 		contentPane.add(button1, BorderLayout.NORTH);
 
-		button2 = new JButton("bt2");
+		button2 = new JButton("Show Weather");
 		contentPane.add(button2, BorderLayout.SOUTH);
 
 		contentPane.add(curDisplay, BorderLayout.CENTER);
@@ -80,6 +81,12 @@ public class MainDisplay implements NotificationListener{
 	@Override
 	public void NewNotification() {
 		switchMode("NotificationDisplay");		
+	}
+	
+	@Override
+	public void ButtonChange(int button, String newText)
+	{
+		changeButton(button, newText);
 	}
 	
 	private void buttonOneAction()
@@ -128,6 +135,18 @@ public class MainDisplay implements NotificationListener{
 		frame.revalidate();		
 	}	
 
+	private void changeButton(int button, String buttonText)
+	{
+		if(button==1)
+		{
+			button1.setText(buttonText);
+		}
+		else if(button==2)
+		{
+			button2.setText(buttonText);
+		}
+	}
+	
 	private void removeCurPanel(){
 		frame.remove(curDisplay);
 	}	

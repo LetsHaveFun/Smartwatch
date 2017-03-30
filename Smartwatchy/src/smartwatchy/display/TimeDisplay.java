@@ -9,11 +9,11 @@ import javax.swing.JTextArea;
 public class TimeDisplay extends Display implements TimeListener{
 	private TimeController timeController;
 	
-	public TimeDisplay()
-	{	
-				
+	public TimeDisplay(ButtonListener buttonListener)
+	{					
 		timeController = new TimeController();
-		timeController.addListener(this);
+		timeController.addTimeListener(this);
+		timeController.addButtonListener(buttonListener);
     }
 	
 	public TimeController GetController()
