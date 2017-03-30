@@ -9,3 +9,8 @@
 /NotificationListener.class
 /Controller.class
 /WeatherListener.class
+/TimeTask.class
+/TimeListener.class
+/ButtonListener.class
+/ButtonTask.class
+/WeatherTask.class

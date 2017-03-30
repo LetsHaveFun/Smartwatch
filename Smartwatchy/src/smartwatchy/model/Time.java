@@ -23,6 +23,21 @@ public class Time {
 		}
 	}
 	
+	public int GetSeconds()
+	{
+		return seconds.getCounter();
+	}
+	
+	public int GetMinutes()
+	{
+		return minutes.getCounter();
+	}
+	
+	public int GetHours()
+	{
+		return hours.getCounter();
+	}
+	
 	public void IncrementSeconds()
 	{
 		seconds.Increment();
