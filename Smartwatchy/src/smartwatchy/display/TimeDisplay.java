@@ -8,16 +8,10 @@ import javax.swing.JTextArea;
 
 public class TimeDisplay extends Display implements TimeListener{
 	private TimeController timeController;
-	JTextArea timeText;
 	
 	public TimeDisplay()
 	{	
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		
-		timeText = new JTextArea();
-		timeText.setRows(2);
-		this.add(timeText);
-
+				
 		timeController = new TimeController();
 		timeController.addListener(this);
     }
@@ -42,7 +36,7 @@ public class TimeDisplay extends Display implements TimeListener{
 	private void UpdateTimeString()
 	{
 		Time currentTime = timeController.GetTime();
-		timeText.setText(GetTimeString(currentTime));
+		setText(GetTimeString(currentTime));
 	}
 	
 	private String GetTimeString(Time time)

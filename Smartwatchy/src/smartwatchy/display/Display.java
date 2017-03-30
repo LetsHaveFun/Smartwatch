@@ -5,6 +5,6 @@ import javax.swing.*;
 /**
  * @author Maksim
  */
-public abstract class Display extends JPanel{
+public abstract class Display extends JTextArea{
     // Why is this here?	
 }

@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import controllers.NotificationListener;
 
@@ -17,7 +16,6 @@ public class MainDisplay implements NotificationListener{
 	private WeatherDisplay weatherDisplay;
 	private JFrame frame;
 	private JButton button1, button2;
-	private JPanel buttonPanel;
 	private Display curDisplay;
 	private String curDisplayString;
 	
@@ -34,11 +32,8 @@ public class MainDisplay implements NotificationListener{
 	public void makeFrame()
 	{
 		frame = new JFrame();
-		buttonPanel = new JPanel();
 		button1 = new JButton("bt1");
-		buttonPanel.add(button1);
 		button2 = new JButton("bt2");
-		buttonPanel.add(button2);
 		
 		button1.addActionListener(new ActionListener()
 		{
@@ -56,8 +51,9 @@ public class MainDisplay implements NotificationListener{
 			  }
 		});
 		
-		frame.add(curDisplay, BorderLayout.EAST);
-		frame.add(buttonPanel, BorderLayout.WEST);
+		frame.add(curDisplay, BorderLayout.CENTER);
+		frame.add(button1, BorderLayout.NORTH);
+		frame.add(button2, BorderLayout.SOUTH);
 		frame.setVisible(true);
 		
 		frame.pack();
@@ -125,22 +121,22 @@ public class MainDisplay implements NotificationListener{
 			case "TimeDisplay":
 				curDisplay = timeDisplay;
 				curDisplayString = "timeDisplay";
-				frame.add(curDisplay, BorderLayout.EAST);
+				frame.add(curDisplay, BorderLayout.CENTER);
 				break;
 			case "WeatherDisplay":
 				curDisplay = weatherDisplay;
 				curDisplayString = "weatherDisplay";
-				frame.add(curDisplay, BorderLayout.EAST);
+				frame.add(curDisplay, BorderLayout.CENTER);
 				break;
 			case "NotificationDisplay":
 				curDisplay = notificationDisplay;
 				curDisplayString = "notificationDisplay";
-				frame.add(curDisplay, BorderLayout.EAST);
+				frame.add(curDisplay, BorderLayout.CENTER);
 				break;
 			default:
 				curDisplay = timeDisplay;
 				curDisplayString = "timeDisplay";
-				frame.add(curDisplay, BorderLayout.EAST);
+				frame.add(curDisplay, BorderLayout.CENTER);
 		}		
 	}
 }

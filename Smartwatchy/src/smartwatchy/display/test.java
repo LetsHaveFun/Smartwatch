@@ -16,11 +16,6 @@ public class test extends JPanel {
 		
 		JButton btnAsdasd = new JButton("asdasd");
 		add(btnAsdasd);
-		
-		JTextArea txtrRgsfg = new JTextArea();
-		txtrRgsfg.setRows(2);
-		txtrRgsfg.setText("rgsfg\r\n\r\nasdada\r\n");
-		add(txtrRgsfg);
 
 	}
 
