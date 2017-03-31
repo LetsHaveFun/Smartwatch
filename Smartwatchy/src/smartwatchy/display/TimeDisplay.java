@@ -1,6 +1,5 @@
 package display;
 
-import controllers.ButtonListener;
 import controllers.TimeController;
 import controllers.TimeListener;
 import model.Time;
@@ -8,11 +7,10 @@ import model.Time;
 public class TimeDisplay extends Display implements TimeListener{
 	private TimeController timeController;
 	
-	public TimeDisplay(ButtonListener buttonListener)
+	public TimeDisplay()
 	{					
 		timeController = new TimeController();
-		timeController.addTimeListener(this);
-		timeController.addButtonListener(buttonListener);
+		timeController.addListener(this);
     }
 	
 	public TimeController GetController()

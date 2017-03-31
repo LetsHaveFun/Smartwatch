@@ -7,10 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
 import javax.swing.*;
 
-import controllers.ButtonListener;
 import controllers.NotificationListener;
 
-public class MainDisplay implements NotificationListener, ButtonListener{
+public class Smartwatch implements NotificationListener{
 	
 	private NotificationDisplay notificationDisplay;
 	private TimeDisplay timeDisplay;
@@ -22,14 +21,19 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 	private String curDisplayString;
 	private String lastDisplayString;
 	
-	public MainDisplay(){		
+	public Smartwatch(){		
 		notificationDisplay = new NotificationDisplay(this);
-		timeDisplay = new TimeDisplay(this);
+		timeDisplay = new TimeDisplay();
 		weatherDisplay = new WeatherDisplay(notificationDisplay.GetController());
 		curDisplay = timeDisplay;
 		curDisplayString = "TimeDisplay";
 		
 		makeFrame();
+	}
+	
+	public static void main(String[] args) 
+    {
+    	Smartwatch newMainDisplay = new Smartwatch();	
 	}
 	
 	public void makeFrame()
@@ -78,6 +82,11 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 		{
 			case "TimeDisplay":
 				timeDisplay.GetController().buttonPressedA();
+				if (timeDisplay.GetController().GetMode() == 1)
+				{
+					changeButton(1, "Increment seconds");
+					changeButton(2, "Switch to minutes");
+				}
 				break;
 			case "WeatherDisplay":
 				weatherDisplay.GetController().PushWarning("Weather updated");
@@ -101,15 +110,27 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 		switch (curDisplayString)
 		{
 			case "TimeDisplay":
-				if (timeDisplay.GetController().GetMode() == 0)
-				{
-					weatherDisplay.WeatherUpdate();
-					switchMode("WeatherDisplay");
+				switch (timeDisplay.GetController().GetMode())
+				{				
+					case 0:
+						changeButton(1, "Edit Time");
+						weatherDisplay.WeatherUpdate();
+						switchMode("WeatherDisplay");
+						break;
+					case 1:
+						changeButton(1, "Increment minutes");
+						changeButton(2, "Switch to hours");
+						break;
+					case 2:
+						changeButton(1, "Increment hours");
+						changeButton(2, "Confirm");
+						break;
+					case 3:
+						changeButton(1, "Edit Time");
+						changeButton(2, "Show Weather");
+						break;
 				}
-				else
-				{
-					timeDisplay.GetController().buttonPressedB();
-				}
+				timeDisplay.GetController().buttonPressedB();
 				break;
 			case "WeatherDisplay":
 				switchMode("TimeDisplay");
@@ -170,12 +191,6 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 				changeButton(2, "Clear Notifications");
 				break;
 		}		
-	}
-	
-	@Override
-	public void ButtonChange(int button, String newText)
-	{
-		changeButton(button, newText);
 	}
 	
 	@Override
