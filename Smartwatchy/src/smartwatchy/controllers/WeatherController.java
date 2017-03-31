@@ -1,37 +1,31 @@
 package controllers;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.w3c.dom.*;
 
 import json.JSONException;
 import json.JSONObject;
-import model.Time;
 import model.Weather;
 
-import javax.xml.parsers.*;
-import java.io.*;
-
 public class WeatherController implements Controller{
-	private Timer weatherTimer;
 	private WeatherTask weatherTask;
+	private Timer weatherTimer;
 	private Weather currentWeather;
 	private List<WeatherListener> listeners = new ArrayList<WeatherListener>();
+	private List<Long> datesRecieved = new ArrayList<Long>();
 	
 	public WeatherController()
 	{
-		weatherTask = new WeatherTask(this, listeners);
+		weatherTask = new WeatherTask(listeners);
 		weatherTimer = new Timer(true);
-		weatherTimer.scheduleAtFixedRate(weatherTask, 0, 15000);
-		updateCurrentWeather();
+		weatherTimer.scheduleAtFixedRate(weatherTask, 1000, 300000);
 	}
 	
 	public Weather GetCurrentWeather()
@@ -43,10 +37,9 @@ public class WeatherController implements Controller{
         listeners.add(toAdd);
     }
 
-    private void PushWarning() {
-        // Notify everybody that may be interested.
+    public void PushWarning(String warningText) {
         for (WeatherListener wl : listeners)
-            wl.WeatherWarning();
+            wl.WeatherWarning(warningText);
     }
 	
 	public void updateCurrentWeather() {
@@ -55,7 +48,7 @@ public class WeatherController implements Controller{
 	
 	@Override
 	public void buttonPressedA() {
-		updateCurrentWeather();
+		// Currently unused
 	}
 	
 	@Override
@@ -75,6 +68,17 @@ public class WeatherController implements Controller{
 			int nightTemp =  todayJSON.getJSONObject("temp").getInt("night");		
 			int eveningTemp = todayJSON.getJSONObject("temp").getInt("eve");	
 			long longTime = todayJSON.getLong("dt") * 1000;
+			
+			for (Object dayJSON : forecastJSON.getJSONArray("list"))
+			{
+				JSONObject dayJSONCast = (JSONObject) dayJSON;
+				Long dayJSONDateLong = dayJSONCast.getLong("dt");
+				if (!datesRecieved.contains(dayJSONDateLong))
+				{
+					datesRecieved.add(dayJSONDateLong);
+					PushWarning("<html>New weather data found!<br>" + dayJSONDateLong + "</html>");
+				}
+			}
 			
 			Weather newCurrentWeather = new Weather(description, weatherID, morningTemp, dayTemp, nightTemp, eveningTemp, longTime);
 			return newCurrentWeather;

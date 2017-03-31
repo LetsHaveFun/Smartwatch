@@ -10,6 +10,12 @@ public class TimeUnit {
 		this.maxCount = maxCount;
 	}
 	
+	public TimeUnit(int maxCount, int initialCount)
+	{
+		counter = initialCount;
+		this.maxCount = maxCount;
+	}
+	
 	public int getCounter()
 	{
 		return counter;

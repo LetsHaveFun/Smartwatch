@@ -1,19 +1,34 @@
 package display;
 
-import controllers.*;
-import model.Time;
 import model.Weather;
 
-import javax.swing.BoxLayout;
-import javax.swing.JTextArea;
+import java.text.SimpleDateFormat;
 
-public class WeatherDisplay extends Display{
+import controllers.WeatherController;
+import controllers.WeatherListener;
+
+public class WeatherDisplay extends Display implements WeatherListener{
+	private final SimpleDateFormat weatherDateFormat = new SimpleDateFormat("EEE MMMMM d");
+	private final SimpleDateFormat updateTimeFormat = new SimpleDateFormat("HH:mm aaa z");
 	private WeatherController weatherController;
 
-	public WeatherDisplay(){		
+	public WeatherDisplay(WeatherListener NotificationWeatherListener){		
 		weatherController = new WeatherController();
-		UpdateWeatherString();
+		weatherController.addListener(this);
+		weatherController.addListener(NotificationWeatherListener);
     }
+
+	@Override
+	public void WeatherWarning(String warningText) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void WeatherUpdate() {
+		weatherController.updateCurrentWeather();
+		UpdateWeatherString();		
+	}
 	
 	public WeatherController GetController()
 	{
@@ -29,12 +44,14 @@ public class WeatherDisplay extends Display{
 	private String GetWeatherString(Weather weather)
 	{
 		String weatherString = "<html>";		
-		weatherString += "Weather today: " + weather.GetDescription() + "<br><br>";
-		weatherString += "Temperatures:<br>";
-		weatherString += "Morning: " +weather.GetMorningTemperature() + "<br>";	
-		weatherString += "Day: " +weather.GetDayTemperature() + "<br>";	
-		weatherString += "Evening: " +weather.GetEveningTemperature() + "<br>";	
-		weatherString += "Night: " +weather.GetNightTemperature() + "<br>";
+		weatherString += "Weather<br>" + weatherDateFormat.format(weather.GetDateTime()) + "<br>";
+		weatherString += weather.GetDescription() + "<br><br>";
+		weatherString += "Temperatures<br>";
+		weatherString += "Morning: " + weather.GetMorningTemperature() + "C<br>";	
+		weatherString += "Day: " + weather.GetDayTemperature() + "C<br>";	
+		weatherString += "Evening: " + weather.GetEveningTemperature() + "C<br>";	
+		weatherString += "Night: " + weather.GetNightTemperature() + "C<br><br>";
+		weatherString += "Last updated<br>" + updateTimeFormat.format(weather.GetUpdateTime());
 		weatherString += "</html>";		
 		
 		return weatherString;

@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 
@@ -19,7 +20,7 @@ public class TimeController implements Controller{
 
 	public TimeController ()
 	{
-		time = new Time();
+		time = new Time(new Date());
 		timeMode = 0;
 		StartTimer();
 	}
@@ -52,21 +53,19 @@ public class TimeController implements Controller{
 	
 	private void StartTimer()
 	{
-		timeTask = new TimeTask(this, timeListeners);
+		timeTask = new TimeTask(timeListeners);
 		timeTimer = new Timer(true);
 		timeTimer.scheduleAtFixedRate(timeTask, 0, 1000);
 	}
 	
 	private void NotifyTimeChanged()
 	{
-		// Notify everybody that may be interested.
         for (TimeListener tl : timeListeners)
             tl.TimeChanged();
 	}
 	
 	private void RequestButtonChange(int button, String newText)
 	{
-		// Notify everybody that may be interested.
         for (ButtonListener bl : buttonListeners)
             bl.ButtonChange(button, newText);
 	}

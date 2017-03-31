@@ -1,10 +1,9 @@
 package display;
 
-import controllers.*;
+import controllers.ButtonListener;
+import controllers.TimeController;
+import controllers.TimeListener;
 import model.Time;
-
-import javax.swing.BoxLayout;
-import javax.swing.JTextArea;
 
 public class TimeDisplay extends Display implements TimeListener{
 	private TimeController timeController;
@@ -24,6 +23,7 @@ public class TimeDisplay extends Display implements TimeListener{
 	@Override
 	public void TimeTicked() 
 	{
+		timeController.GetTime().Tick();
 		UpdateTimeString();
 	}
 

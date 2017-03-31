@@ -1,6 +1,5 @@
 package display;
 
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,13 +20,14 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 	private JPanel contentPane;
 	private Display curDisplay;
 	private String curDisplayString;
+	private String lastDisplayString;
 	
 	public MainDisplay(){		
-		notificationDisplay = new NotificationDisplay();
+		notificationDisplay = new NotificationDisplay(this);
 		timeDisplay = new TimeDisplay(this);
-		weatherDisplay = new WeatherDisplay();
+		weatherDisplay = new WeatherDisplay(notificationDisplay.GetController());
 		curDisplay = timeDisplay;
-		curDisplayString = "timeDisplay";
+		curDisplayString = "TimeDisplay";
 		
 		makeFrame();
 	}
@@ -37,7 +37,7 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 500, 300);
+		frame.setBounds(100, 100, 300, 600);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,39 +68,30 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 			  {
 				  buttonTwoAction();
 			  }
-		});
-		
-		
-		
-		
-		frame.setVisible(true);
-		
-		
-	}
-
-	@Override
-	public void NewNotification() {
-		switchMode("NotificationDisplay");		
-	}
-	
-	@Override
-	public void ButtonChange(int button, String newText)
-	{
-		changeButton(button, newText);
+		});		
+		frame.setVisible(true);		
 	}
 	
 	private void buttonOneAction()
 	{
 		switch (curDisplayString)
 		{
-			case "timeDisplay":
+			case "TimeDisplay":
 				timeDisplay.GetController().buttonPressedA();
 				break;
-			case "weatherDisplay":
-				weatherDisplay.GetController().buttonPressedA();
+			case "WeatherDisplay":
+				weatherDisplay.GetController().PushWarning("Weather updated");
+				weatherDisplay.WeatherUpdate();
 				break;
 			case "NotificationDisplay":
-				notificationDisplay.notificationController.buttonPressedA();
+				if (notificationDisplay.GetController().NotificationsLeft())
+				{
+					notificationDisplay.ShowNewNotification();
+				}
+				else 
+				{
+					switchMode(lastDisplayString);
+				}
 				break;		
 		}
 	}
@@ -109,9 +100,10 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 	{
 		switch (curDisplayString)
 		{
-			case "timeDisplay":
+			case "TimeDisplay":
 				if (timeDisplay.GetController().GetMode() == 0)
 				{
+					weatherDisplay.WeatherUpdate();
 					switchMode("WeatherDisplay");
 				}
 				else
@@ -119,21 +111,15 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 					timeDisplay.GetController().buttonPressedB();
 				}
 				break;
-			case "weatherDisplay":
+			case "WeatherDisplay":
 				switchMode("TimeDisplay");
 				break;
 			case "NotificationDisplay":
-				notificationDisplay.notificationController.buttonPressedB();
+				notificationDisplay.GetController().buttonPressedB();
+				switchMode(lastDisplayString);
 				break;		
 		}
 	}
-	
-	private void switchMode(String nextDisplay)
-	{
-		removeCurPanel();
-		addNewDisplay(nextDisplay);
-		frame.revalidate();	
-	}	
 
 	private void changeButton(int button, String buttonText)
 	{
@@ -147,6 +133,13 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 		}
 	}
 	
+	private void switchMode(String nextDisplay)
+	{
+		removeCurPanel();
+		addNewDisplay(nextDisplay);
+		frame.revalidate();	
+	}	
+	
 	private void removeCurPanel(){
 		contentPane.remove(curDisplay);
 		contentPane.repaint();
@@ -157,29 +150,46 @@ public class MainDisplay implements NotificationListener, ButtonListener{
 		{
 			case "TimeDisplay":
 				curDisplay = timeDisplay;
-				curDisplayString = "timeDisplay";
+				curDisplayString = "TimeDisplay";
 				contentPane.add(curDisplay, BorderLayout.CENTER);
 				changeButton(1, "Edit Time");
 				changeButton(2, "Show Weather");
 				break;
 			case "WeatherDisplay":
 				curDisplay = weatherDisplay;
-				curDisplayString = "weatherDisplay";
+				curDisplayString = "WeatherDisplay";
 				contentPane.add(curDisplay, BorderLayout.CENTER);
 				changeButton(1, "Update");
 				changeButton(2, "Show Time");
 				break;
 			case "NotificationDisplay":
 				curDisplay = notificationDisplay;
-				curDisplayString = "notificationDisplay";
+				curDisplayString = "NotificationDisplay";
 				contentPane.add(curDisplay, BorderLayout.CENTER);
 				changeButton(1, "Close Notification");
 				changeButton(2, "Clear Notifications");
 				break;
-			default:
-				curDisplay = timeDisplay;
-				curDisplayString = "timeDisplay";
-				contentPane.add(curDisplay, BorderLayout.CENTER);
 		}		
+	}
+	
+	@Override
+	public void ButtonChange(int button, String newText)
+	{
+		changeButton(button, newText);
+	}
+	
+	@Override
+	public void NewNotification() {
+		if (!curDisplayString.equals("NotificationDisplay"))
+		{
+			lastDisplayString = curDisplayString;
+			switchMode("NotificationDisplay");
+			notificationDisplay.ShowNewNotification();
+		}				
+	}
+
+	@Override
+	public void CheckNotification() {
+		// Currently unused		
 	}
 }

@@ -1,18 +1,22 @@
 package display;
 
-import controllers.*;
-import javax.swing.BoxLayout;
-import javax.swing.JTextArea;
+import controllers.NotificationController;
+import controllers.NotificationListener;
 
 public class NotificationDisplay extends Display{
-    
-	protected NotificationController notificationController;
+    private NotificationController notificationController;
 
-	public NotificationDisplay(){
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		JTextArea textArea = new JTextArea();
-		textArea.setRows(2);
-		textArea.setText("This is the notifications");
-		add(textArea);
+	public NotificationDisplay(NotificationListener mainListener){		
+		notificationController = new NotificationController();
+		notificationController.addListener(mainListener);
     }
+	
+	public NotificationController GetController()
+	{
+		return notificationController;
+	}
+	
+	public void ShowNewNotification() {
+		setText(notificationController.GetFirstNotification().GetNotificationMessage());	
+	}
 }

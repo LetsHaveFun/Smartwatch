@@ -10,6 +10,7 @@ public class Weather {
 	private int nightTemp;
 	private int eveningTemp;
 	private Date dateTime;
+	private Date updateTime;
 	
 	public Weather(String description, int weatherID, int morningTemp, int dayTemp, int nightTemp, int eveningTemp, long time)
 	{
@@ -20,6 +21,7 @@ public class Weather {
 		this.nightTemp = nightTemp;
 		this.eveningTemp = eveningTemp;
 		dateTime = new Date(time);
+		this.updateTime = new Date();
 	}
 	
 	public String GetDescription()
@@ -45,5 +47,20 @@ public class Weather {
 	public int GetEveningTemperature()
 	{
 		return eveningTemp;
+	}
+	
+	public Date GetDateTime()
+	{
+		return dateTime;
+	}
+	
+	public Date GetUpdateTime()
+	{
+		return updateTime;
+	}
+	
+	public int GetWeatherID()
+	{
+		return weatherID;
 	}
 }

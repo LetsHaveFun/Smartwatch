@@ -2,20 +2,19 @@ package model;
 
 import java.util.Date;
 
-public class Notification {
-	
-	private String notification;
+public class Notification {	
+	private String notificationMessage;
 	private Date dateTime;
 	
-	public Notification(String notificationtmp)
+	public Notification(String notificationMessage)
 	{
-		notification = notificationtmp;
+		this.notificationMessage = notificationMessage;
 		dateTime = new Date();
 	} 	
 	
-	public String GetNotification()
+	public String GetNotificationMessage()
 	{
-		return notification;
+		return notificationMessage;
 	}
 	
 	public Date GetNotificationDateTime()
